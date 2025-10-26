@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Bot, Send, Loader2, Sparkles, FileText, Globe, DollarSign, Ship, AlertCircle, Trash2, Copy, Download, TrendingUp, Package, Award, MessageSquare, Zap } from 'lucide-react';
+import { Bot, Send, Loader2, Sparkles, FileText, Globe, DollarSign, Ship, AlertCircle, Trash2, Copy, Download, TrendingUp, Package, Award, MessageSquare, Zap, Menu, X } from 'lucide-react';
 
 const AISimulation = () => {
   const GEMINI_API_KEY = 'AIzaSyDN89jmqOLyh9P3-KUUOpXNe_3S5vonOss';
@@ -14,6 +14,7 @@ const AISimulation = () => {
   const [chatInput, setChatInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [selectedScenario, setSelectedScenario] = useState(null);
+  const [showSidebar, setShowSidebar] = useState(false);
   const chatContainerRef = useRef(null);
 
   const scenarios = [
@@ -74,17 +75,10 @@ const AISimulation = () => {
     'How to deal with non-payment from international buyers?'
   ];
 
-  const stats = [
-    { icon: MessageSquare, label: 'Questions Answered', value: '10,000+', color: '#bc1823' },
-    { icon: Globe, label: 'Countries Covered', value: '195', color: '#ffa629' },
-    { icon: Award, label: 'Success Rate', value: '98%', color: '#bc1823' },
-    { icon: Zap, label: 'Avg Response Time', value: '3s', color: '#ffa629' }
-  ];
-
   const callGeminiAPI = async (userMessage) => {
     try {
       const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
         {
           method: 'POST',
           headers: {
@@ -135,11 +129,10 @@ Format your response in a clear, structured manner with bullet points and paragr
     }
   };
 
-  const handleSendMessage = async (e, customMessage = null) => {
-    e?.preventDefault();
+  const handleSendMessage = async (customMessage = null) => {
     const messageToSend = customMessage || chatInput.trim();
     
-    if (!messageToSend) return;
+    if (!messageToSend || isLoading) return;
 
     const userMessage = {
       type: 'user',
@@ -149,6 +142,7 @@ Format your response in a clear, structured manner with bullet points and paragr
     setChatMessages(prev => [...prev, userMessage]);
     setChatInput('');
     setIsLoading(true);
+    setShowSidebar(false);
 
     const aiResponse = await callGeminiAPI(messageToSend);
 
@@ -163,11 +157,11 @@ Format your response in a clear, structured manner with bullet points and paragr
 
   const handleScenarioClick = (scenario) => {
     setSelectedScenario(scenario.id);
-    handleSendMessage(null, scenario.prompt);
+    handleSendMessage(scenario.prompt);
   };
 
   const handleQuickQuestion = (question) => {
-    handleSendMessage(null, question);
+    handleSendMessage(question);
   };
 
   const handleClearChat = () => {
@@ -183,7 +177,6 @@ Format your response in a clear, structured manner with bullet points and paragr
 
   const handleCopyMessage = (text) => {
     navigator.clipboard.writeText(text);
-    alert('Message copied to clipboard!');
   };
 
   const handleExportChat = () => {
@@ -200,67 +193,102 @@ Format your response in a clear, structured manner with bullet points and paragr
   };
 
   const formatMessage = (text) => {
-    return text.split('\n').map((line, index) => (
-      <span key={index}>
-        {line}
-        {index < text.split('\n').length - 1 && <br />}
-      </span>
-    ));
+    const lines = text.split('\n');
+    return lines.map((line, index) => {
+      if (line.startsWith('•') || line.startsWith('-')) {
+        return (
+          <div key={index} className="flex gap-2 my-1">
+            <span style={{ color: '#bc1823' }}>•</span>
+            <span>{line.substring(1).trim()}</span>
+          </div>
+        );
+      }
+      return (
+        <span key={index}>
+          {line}
+          {index < lines.length - 1 && <br />}
+        </span>
+      );
+    });
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-orange-50 p-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center mb-4">
-            <Bot className="w-12 h-12 mr-3" style={{ color: '#bc1823' }} />
-            <h1 className="text-5xl font-bold bg-gradient-to-r from-[#bc1823] to-[#ffa629] bg-clip-text text-transparent">
-              AI Export Assistant
-            </h1>
+    <div className="h-screen flex flex-col bg-white overflow-hidden">
+      {/* Header */}
+      <div className="flex-shrink-0 border-b-2 bg-gradient-to-r from-[#bc1823] to-[#ffa629] px-4 py-4" style={{ borderColor: '#e5e7eb' }}>
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setShowSidebar(!showSidebar)}
+              className="lg:hidden p-2 rounded-lg bg-white bg-opacity-20 hover:bg-opacity-30"
+            >
+              <Menu className="w-6 h-6 text-white" />
+            </button>
+            <Bot className="w-8 h-8 text-white" />
+            <div>
+              <h1 className="text-xl md:text-2xl font-bold text-white">AI Export Assistant</h1>
+              <p className="text-xs text-white opacity-90 hidden sm:block">Powered by Gemini AI</p>
+            </div>
           </div>
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Sparkles className="w-5 h-5" style={{ color: '#ffa629' }} />
-            <p className="text-xl font-bold" style={{ color: '#3d3d3d' }}>
-              Powered by Gemini 1.5 Flash - Your 24/7 Export Consultant
-            </p>
+          <div className="flex gap-2">
+            <button
+              onClick={handleClearChat}
+              className="p-2 rounded-lg bg-white bg-opacity-20 hover:bg-opacity-30 transition-all"
+              title="Clear Chat"
+            >
+              <Trash2 className="w-5 h-5 text-white" />
+            </button>
+            <button
+              onClick={handleExportChat}
+              className="p-2 rounded-lg bg-white bg-opacity-20 hover:bg-opacity-30 transition-all"
+              title="Export Chat"
+            >
+              <Download className="w-5 h-5 text-white" />
+            </button>
           </div>
         </div>
+      </div>
 
-        {/* Stats Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          {stats.map((stat, index) => {
-            const Icon = stat.icon;
-            return (
-              <div key={index} className="bg-white rounded-xl p-5 shadow-lg text-center border-t-4 hover:shadow-xl transition-all" style={{ borderColor: stat.color }}>
-                <Icon className="w-8 h-8 mx-auto mb-2" style={{ color: stat.color }} />
-                <p className="text-2xl font-bold mb-1" style={{ color: '#3d3d3d' }}>{stat.value}</p>
-                <p className="text-sm font-bold" style={{ color: stat.color }}>{stat.label}</p>
-              </div>
-            );
-          })}
-        </div>
+      <div className="flex-1 flex overflow-hidden">
+        {/* Sidebar - Mobile Overlay */}
+        {showSidebar && (
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+            onClick={() => setShowSidebar(false)}
+          />
+        )}
 
-        {/* Main Content - Single Page Layout */}
-        <div className="grid lg:grid-cols-3 gap-6">
-          {/* Left Sidebar - Scenarios */}
-          <div className="space-y-6">
-            <div className="bg-white rounded-2xl p-6 shadow-xl border-2" style={{ borderColor: '#bc1823' }}>
-              <h3 className="text-2xl font-bold mb-4 flex items-center" style={{ color: '#bc1823' }}>
-                <Package className="w-6 h-6 mr-2" />
+        {/* Sidebar */}
+        <div className={`
+          fixed lg:relative inset-y-0 left-0 z-50
+          w-80 bg-white border-r-2 overflow-y-auto
+          transform transition-transform duration-300 ease-in-out
+          ${showSidebar ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+        `} style={{ borderColor: '#e5e7eb' }}>
+          <div className="p-4 space-y-4">
+            {/* Close button for mobile */}
+            <div className="lg:hidden flex justify-between items-center mb-4">
+              <h3 className="text-lg font-bold" style={{ color: '#bc1823' }}>Menu</h3>
+              <button onClick={() => setShowSidebar(false)}>
+                <X className="w-6 h-6" style={{ color: '#bc1823' }} />
+              </button>
+            </div>
+
+            {/* Expert Topics */}
+            <div>
+              <h3 className="text-lg font-bold mb-3 flex items-center" style={{ color: '#bc1823' }}>
+                <Package className="w-5 h-5 mr-2" />
                 Expert Topics
               </h3>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {scenarios.map((scenario) => {
                   const Icon = scenario.icon;
                   return (
                     <button
                       key={scenario.id}
                       onClick={() => handleScenarioClick(scenario)}
-                      className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all transform hover:scale-105 ${
-                        selectedScenario === scenario.id
-                          ? 'shadow-lg'
-                          : 'hover:shadow-md'
+                      className={`w-full text-left px-3 py-2.5 rounded-lg border-2 transition-all ${
+                        selectedScenario === scenario.id ? 'shadow-md' : ''
                       }`}
                       style={{ 
                         borderColor: selectedScenario === scenario.id ? scenario.color : '#e5e7eb',
@@ -268,9 +296,9 @@ Format your response in a clear, structured manner with bullet points and paragr
                       }}
                       disabled={isLoading}
                     >
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: scenario.color }}>
-                          <Icon className="w-5 h-5 text-white" />
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: scenario.color }}>
+                          <Icon className="w-4 h-4 text-white" />
                         </div>
                         <p className="font-bold text-sm" style={{ color: '#3d3d3d' }}>
                           {scenario.title}
@@ -282,161 +310,161 @@ Format your response in a clear, structured manner with bullet points and paragr
               </div>
             </div>
 
+            {/* Quick Questions */}
+            <div>
+              <h3 className="text-lg font-bold mb-3 flex items-center" style={{ color: '#ffa629' }}>
+                <MessageSquare className="w-5 h-5 mr-2" />
+                Quick Questions
+              </h3>
+              <div className="space-y-2 max-h-64 overflow-y-auto">
+                {quickQuestions.slice(0, 6).map((question, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleQuickQuestion(question)}
+                    className="w-full text-left px-3 py-2 rounded-lg hover:bg-red-50 transition-all text-xs font-semibold border"
+                    style={{ color: '#3d3d3d', borderColor: '#e5e7eb' }}
+                    disabled={isLoading}
+                  >
+                    <div className="flex items-start gap-2">
+                      <span>💡</span>
+                      <span>{question}</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* Pro Tips */}
-            <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl p-6 shadow-xl border-2" style={{ borderColor: '#ffa629' }}>
-              <h3 className="text-xl font-bold mb-4 flex items-center" style={{ color: '#bc1823' }}>
-                <Sparkles className="w-5 h-5 mr-2" />
+            <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-4 border-2" style={{ borderColor: '#ffa629' }}>
+              <h3 className="text-sm font-bold mb-3 flex items-center" style={{ color: '#bc1823' }}>
+                <Sparkles className="w-4 h-4 mr-2" />
                 Pro Tips
               </h3>
-              <div className="space-y-3 text-sm font-medium" style={{ color: '#3d3d3d' }}>
+              <div className="space-y-2 text-xs font-medium" style={{ color: '#3d3d3d' }}>
                 <p className="flex items-start gap-2">
                   <span>🎯</span>
-                  <span>Be specific with your questions for detailed AI responses</span>
+                  <span>Be specific for detailed responses</span>
                 </p>
                 <p className="flex items-start gap-2">
                   <span>📝</span>
-                  <span>Mention your target country for region-specific advice</span>
+                  <span>Mention target country</span>
                 </p>
                 <p className="flex items-start gap-2">
                   <span>💼</span>
-                  <span>Include your product type for tailored guidance</span>
-                </p>
-                <p className="flex items-start gap-2">
-                  <span>🔄</span>
-                  <span>Ask follow-up questions for deeper insights</span>
-                </p>
-                <p className="flex items-start gap-2">
-                  <span>💾</span>
-                  <span>Export conversations for future reference</span>
+                  <span>Include product type</span>
                 </p>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Center - Chat Interface */}
-          <div className="bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col border-2" style={{ height: '700px', borderColor: '#bc1823' }}>
-            <div className="p-5 bg-gradient-to-r from-[#bc1823] to-[#ffa629]">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-                    <Bot className="w-7 h-7" />
-                    Chat with AI Expert
-                  </h2>
-                  <p className="text-sm text-white mt-1 font-medium">
-                    Get instant answers to all your export questions
-                  </p>
-                </div>
-                <div className="flex gap-2">
-                  <button
-                    onClick={handleClearChat}
-                    className="p-2 rounded-lg bg-white bg-opacity-20 hover:bg-opacity-30 transition-all"
-                    title="Clear Chat"
-                  >
-                    <Trash2 className="w-5 h-5 text-white" />
-                  </button>
-                  <button
-                    onClick={handleExportChat}
-                    className="p-2 rounded-lg bg-white bg-opacity-20 hover:bg-opacity-30 transition-all"
-                    title="Export Chat"
-                  >
-                    <Download className="w-5 h-5 text-white" />
-                  </button>
-                </div>
-              </div>
-            </div>
-            
-            {/* Messages Container - NO AUTO SCROLL */}
-            <div 
-              ref={chatContainerRef}
-              className="flex-1 overflow-y-auto p-5 space-y-4 bg-gradient-to-b from-gray-50 to-white"
-            >
+        {/* Main Chat Area */}
+        <div className="flex-1 flex flex-col overflow-hidden">
+          {/* Messages Container */}
+          <div 
+            ref={chatContainerRef}
+            className="flex-1 overflow-y-auto px-4 py-6"
+          >
+            <div className="max-w-4xl mx-auto space-y-6">
               {chatMessages.map((message, index) => (
                 <div key={index} className="group">
-                  <div className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
-                    <div className="relative max-w-2xl">
-                      <div className={`px-5 py-4 rounded-2xl shadow-md ${
+                  <div className={`flex gap-3 ${message.type === 'user' ? 'flex-row-reverse' : ''}`}>
+                    {/* Avatar */}
+                    <div className="flex-shrink-0">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                        message.type === 'user' ? 'bg-gradient-to-r from-[#bc1823] to-[#d32f2f]' : 'bg-gradient-to-r from-[#ffa629] to-[#ffb84d]'
+                      }`}>
+                        {message.type === 'user' ? (
+                          <span className="text-white text-sm font-bold">U</span>
+                        ) : (
+                          <Bot className="w-5 h-5 text-white" />
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Message Content */}
+                    <div className="flex-1 min-w-0">
+                      <div className={`inline-block max-w-full rounded-2xl px-4 py-3 ${
                         message.type === 'user' 
-                          ? 'bg-gradient-to-r from-[#bc1823] to-[#d32f2f]' 
-                          : 'bg-white border-2'
-                      }`} style={message.type === 'bot' ? { borderColor: '#ffa629' } : {}}>
-                        <div className="text-sm leading-relaxed whitespace-pre-wrap font-medium" style={{ color: message.type === 'user' ? '#fff' : '#3d3d3d' }}>
+                          ? 'bg-gradient-to-r from-[#bc1823] to-[#d32f2f] text-white' 
+                          : 'bg-gray-100'
+                      }`}>
+                        <div className={`text-sm leading-relaxed whitespace-pre-wrap break-words ${
+                          message.type === 'user' ? 'text-white' : ''
+                        }`} style={message.type === 'bot' ? { color: '#3d3d3d' } : {}}>
                           {formatMessage(message.text)}
-                        </div>
-                        <div className={`text-xs mt-2 font-semibold ${message.type === 'user' ? 'text-white opacity-80' : ''}`} style={message.type === 'bot' ? { color: '#ffa629' } : {}}>
-                          {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </div>
                       </div>
                       
-                      <button
-                        onClick={() => handleCopyMessage(message.text)}
-                        className="absolute -right-10 top-2 opacity-0 group-hover:opacity-100 transition-opacity p-2 rounded-lg hover:bg-red-50"
-                        title="Copy message"
-                      >
-                        <Copy className="w-4 h-4" style={{ color: '#bc1823' }} />
-                      </button>
+                      {/* Timestamp and Actions */}
+                      <div className="flex items-center gap-2 mt-1 px-1">
+                        <span className="text-xs font-medium" style={{ color: '#ffa629' }}>
+                          {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        </span>
+                        <button
+                          onClick={() => handleCopyMessage(message.text)}
+                          className="opacity-0 group-hover:opacity-100 transition-opacity p-1 rounded hover:bg-gray-100"
+                          title="Copy"
+                        >
+                          <Copy className="w-3 h-3" style={{ color: '#bc1823' }} />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               ))}
               
               {isLoading && (
-                <div className="flex justify-start">
-                  <div className="bg-white border-2 px-5 py-4 rounded-2xl shadow-md" style={{ borderColor: '#ffa629' }}>
-                    <div className="flex items-center gap-3">
-                      <Loader2 className="w-6 h-6 animate-spin" style={{ color: '#bc1823' }} />
-                      <span className="text-sm font-bold" style={{ color: '#3d3d3d' }}>AI is thinking...</span>
+                <div className="flex gap-3">
+                  <div className="flex-shrink-0">
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gradient-to-r from-[#ffa629] to-[#ffb84d]">
+                      <Bot className="w-5 h-5 text-white" />
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <div className="inline-block rounded-2xl px-4 py-3 bg-gray-100">
+                      <div className="flex items-center gap-2">
+                        <Loader2 className="w-5 h-5 animate-spin" style={{ color: '#bc1823' }} />
+                        <span className="text-sm font-medium" style={{ color: '#3d3d3d' }}>Thinking...</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               )}
             </div>
-            
-            {/* Input Form */}
-            <form onSubmit={handleSendMessage} className="p-5 border-t-2 bg-white" style={{ borderColor: '#e5e7eb' }}>
-              <div className="flex gap-3">
+          </div>
+          
+          {/* Input Area */}
+          <div className="flex-shrink-0 border-t-2 bg-white p-4" style={{ borderColor: '#e5e7eb' }}>
+            <div className="max-w-4xl mx-auto">
+              <div className="flex gap-2">
                 <input
                   type="text"
                   value={chatInput}
                   onChange={(e) => setChatInput(e.target.value)}
-                  placeholder="Ask about export procedures, documentation, regulations..."
-                  className="flex-1 px-5 py-4 border-2 rounded-xl focus:outline-none font-medium"
-                  style={{ color: '#3d3d3d', borderColor: '#e5e7eb', focusBorderColor: '#bc1823' }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault();
+                      handleSendMessage();
+                    }
+                  }}
+                  placeholder="Ask about export procedures, regulations..."
+                  className="flex-1 px-4 py-3 border-2 rounded-xl focus:outline-none font-medium text-sm md:text-base"
+                  style={{ color: '#3d3d3d', borderColor: '#e5e7eb' }}
                   disabled={isLoading}
                 />
                 <button
-                  type="submit"
-                  className="px-8 py-4 rounded-xl text-white font-bold flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+                  onClick={() => handleSendMessage()}
+                  className="px-6 py-3 rounded-xl text-white font-bold flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transition-all"
                   style={{ backgroundColor: '#bc1823' }}
-                  disabled={isLoading}
+                  disabled={isLoading || !chatInput.trim()}
                 >
-                  {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
+                  {isLoading ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : (
+                    <Send className="w-5 h-5" />
+                  )}
                 </button>
-              </div>
-            </form>
-          </div>
-
-          {/* Right Sidebar - Quick Questions */}
-          <div className="space-y-6">
-            <div className="bg-white rounded-2xl p-6 shadow-xl border-2" style={{ borderColor: '#ffa629' }}>
-              <h3 className="text-2xl font-bold mb-4 flex items-center" style={{ color: '#ffa629' }}>
-                <MessageSquare className="w-6 h-6 mr-2" />
-                Quick Questions
-              </h3>
-              <div className="space-y-2 max-h-[580px] overflow-y-auto">
-                {quickQuestions.map((question, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleQuickQuestion(question)}
-                    className="w-full text-left px-4 py-3 rounded-xl hover:shadow-md transition-all text-sm font-semibold border-2"
-                    style={{ color: '#3d3d3d', borderColor: '#e5e7eb', backgroundColor: 'white' }}
-                    disabled={isLoading}
-                  >
-                    <div className="flex items-start gap-2">
-                      <span className="text-lg">💡</span>
-                      <span>{question}</span>
-                    </div>
-                  </button>
-                ))}
               </div>
             </div>
           </div>
