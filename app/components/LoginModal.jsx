@@ -10,7 +10,7 @@ export default function LoginModal({ onClose, onLoginSuccess }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const validCredentials = {
-    email: 'admin',
+    email: 'admin@admin',
     password: 'admin'
   };
 
@@ -130,3 +130,4 @@ export default function LoginModal({ onClose, onLoginSuccess }) {
   );
 
 }
+
