@@ -66,10 +66,10 @@ export default function LandingPage({ onShowLogin }) {
   ];
 
   const stats = [
-    { number: "10,000+", label: "Active Students", icon: <Users className="w-8 h-8" /> },
-    { number: "50+", label: "Expert Mentors", icon: <Target className="w-8 h-8" /> },
-    { number: "95%", label: "Success Rate", icon: <Star className="w-8 h-8" /> },
-    { number: "30+", label: "Countries Reached", icon: <Globe className="w-8 h-8" /> }
+    { number: "39", label: "Active Students", icon: <Users className="w-8 h-8" /> },
+    { number: "5+", label: "Expert Mentors", icon: <Target className="w-8 h-8" /> },
+    { number: "80%", label: "Success Rate", icon: <Star className="w-8 h-8" /> },
+    { number: "5+", label: "Countries Reached", icon: <Globe className="w-8 h-8" /> }
   ];
 
   // Courses dengan support image - ganti imageUrl sesuai kebutuhan
@@ -78,7 +78,7 @@ export default function LandingPage({ onShowLogin }) {
       title: "Export Fundamentals",
       level: "Beginner",
       duration: "6 weeks",
-      students: "2,500+",
+      students: "2",
       rating: 4.8,
       imageUrl: "ekspor1.jpeg", // Ganti dengan path image Anda
       color: "#bc1823"
@@ -87,7 +87,7 @@ export default function LandingPage({ onShowLogin }) {
       title: "Import Documentation",
       level: "Intermediate",
       duration: "8 weeks",
-      students: "1,800+",
+      students: "5",
       rating: 4.9,
       imageUrl: "ekspor2.jpeg", // Ganti dengan path image Anda
       color: "#ffa629"
@@ -96,7 +96,7 @@ export default function LandingPage({ onShowLogin }) {
       title: "International Trade Law",
       level: "Advanced",
       duration: "10 weeks",
-      students: "1,200+",
+      students: "20",
       rating: 4.7,
       imageUrl: "ekspor3.jpeg", // Ganti dengan path image Anda
       color: "#3d3d3d"
@@ -439,7 +439,7 @@ export default function LandingPage({ onShowLogin }) {
                     ))}
                   </div>
                   <div>
-                    <p className="font-semibold" style={{ color: '#3d3d3d' }}>10,000+ Students</p>
+                    <p className="font-semibold" style={{ color: '#3d3d3d' }}>39 Students</p>
                     <p className="text-sm text-gray-600">Already learning with us</p>
                   </div>
                 </div>
@@ -780,4 +780,5 @@ export default function LandingPage({ onShowLogin }) {
       </div>
     </>
   );
+
 }
