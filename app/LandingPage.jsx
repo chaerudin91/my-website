@@ -66,7 +66,7 @@ export default function LandingPage({ onShowLogin }) {
   ];
 
   const stats = [
-    { number: "39", label: "Active Students", icon: <Users className="w-8 h-8" /> },
+    { number: "39", label: "Active Users", icon: <Users className="w-8 h-8" /> },
     { number: "5+", label: "Expert Mentors", icon: <Target className="w-8 h-8" /> },
     { number: "80%", label: "Success Rate", icon: <Star className="w-8 h-8" /> },
     { number: "5+", label: "Countries Reached", icon: <Globe className="w-8 h-8" /> }
@@ -78,7 +78,7 @@ export default function LandingPage({ onShowLogin }) {
       title: "Export Fundamentals",
       level: "Beginner",
       duration: "6 weeks",
-      students: "2",
+      users: "2",
       rating: 4.8,
       imageUrl: "ekspor1.jpeg", // Ganti dengan path image Anda
       color: "#bc1823"
@@ -87,7 +87,7 @@ export default function LandingPage({ onShowLogin }) {
       title: "Import Documentation",
       level: "Intermediate",
       duration: "8 weeks",
-      students: "5",
+      users: "5",
       rating: 4.9,
       imageUrl: "ekspor2.jpeg", // Ganti dengan path image Anda
       color: "#ffa629"
@@ -96,7 +96,7 @@ export default function LandingPage({ onShowLogin }) {
       title: "International Trade Law",
       level: "Advanced",
       duration: "10 weeks",
-      students: "20",
+      users: "20",
       rating: 4.7,
       imageUrl: "ekspor3.jpeg", // Ganti dengan path image Anda
       color: "#3d3d3d"
@@ -439,7 +439,7 @@ export default function LandingPage({ onShowLogin }) {
                     ))}
                   </div>
                   <div>
-                    <p className="font-semibold" style={{ color: '#3d3d3d' }}>39 Students</p>
+                    <p className="font-semibold" style={{ color: '#3d3d3d' }}>39 users</p>
                     <p className="text-sm text-gray-600">Already learning with us</p>
                   </div>
                 </div>
@@ -590,7 +590,7 @@ export default function LandingPage({ onShowLogin }) {
                     <h3 className="text-2xl font-bold mb-3" style={{ color: '#3d3d3d' }}>
                       {course.title}
                     </h3>
-                    <p className="text-gray-600 mb-4">{course.students} students enrolled</p>
+                    <p className="text-gray-600 mb-4">{course.users} users enrolled</p>
                     <button className="w-full py-3 rounded-full font-semibold flex items-center justify-center gap-2 transition-all hover:scale-105 hover-glow" style={{ backgroundColor: '#bc1823', color: 'white' }}>
                       Learn More
                       <ChevronRight className="w-5 h-5" />
@@ -660,7 +660,7 @@ export default function LandingPage({ onShowLogin }) {
               className={`text-center mb-16 ${visibleSections.has('testimonials-title') ? 'visible animate-fade-in-up' : ''}`}
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: '#3d3d3d' }}>
-                What Our <span style={{ color: '#bc1823' }}>Students Say</span>
+                What Our <span style={{ color: '#bc1823' }}>users Say</span>
               </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                 Success stories from our growing community
@@ -782,3 +782,4 @@ export default function LandingPage({ onShowLogin }) {
   );
 
 }
+
