@@ -20,8 +20,8 @@ export default function LoginModal({ onClose, onLoginSuccess }) {
   const [floatingElements, setFloatingElements] = useState([]);
 
   const validCredentials = {
-    email: 'user@ekspora.com',
-    password: 'ekspora123'
+    email: 'admin@admin',
+    password: 'admin'
   };
 
   useEffect(() => {
@@ -664,4 +664,5 @@ export default function LoginModal({ onClose, onLoginSuccess }) {
       </div>
     </>
   );
+
 }
