@@ -175,22 +175,22 @@ const CommunityForum = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <div className="bg-white rounded-xl p-5 shadow-lg text-center border-t-4" style={{ borderColor: '#bc1823' }}>
             <MessageSquare className="w-8 h-8 mx-auto mb-2" style={{ color: '#bc1823' }} />
-            <p className="text-3xl font-bold" style={{ color: '#3d3d3d' }}>2,847</p>
+            <p className="text-3xl font-bold" style={{ color: '#3d3d3d' }}>500</p>
             <p className="text-sm font-bold" style={{ color: '#bc1823' }}>Total Discussions</p>
           </div>
           <div className="bg-white rounded-xl p-5 shadow-lg text-center border-t-4" style={{ borderColor: '#ffa629' }}>
             <Users className="w-8 h-8 mx-auto mb-2" style={{ color: '#ffa629' }} />
-            <p className="text-3xl font-bold" style={{ color: '#3d3d3d' }}>8,521</p>
+            <p className="text-3xl font-bold" style={{ color: '#3d3d3d' }}>39</p>
             <p className="text-sm font-bold" style={{ color: '#ffa629' }}>Active Members</p>
           </div>
           <div className="bg-white rounded-xl p-5 shadow-lg text-center border-t-4" style={{ borderColor: '#bc1823' }}>
             <MessageCircle className="w-8 h-8 mx-auto mb-2" style={{ color: '#bc1823' }} />
-            <p className="text-3xl font-bold" style={{ color: '#3d3d3d' }}>45,623</p>
+            <p className="text-3xl font-bold" style={{ color: '#3d3d3d' }}>1000</p>
             <p className="text-sm font-bold" style={{ color: '#bc1823' }}>Total Replies</p>
           </div>
           <div className="bg-white rounded-xl p-5 shadow-lg text-center border-t-4" style={{ borderColor: '#ffa629' }}>
             <TrendingUp className="w-8 h-8 mx-auto mb-2" style={{ color: '#ffa629' }} />
-            <p className="text-3xl font-bold" style={{ color: '#3d3d3d' }}>96%</p>
+            <p className="text-3xl font-bold" style={{ color: '#3d3d3d' }}>80%</p>
             <p className="text-sm font-bold" style={{ color: '#ffa629' }}>Response Rate</p>
           </div>
         </div>
@@ -542,5 +542,6 @@ const CommunityForum = () => {
     </div>
   );
 };
+
 
 export default CommunityForum;
