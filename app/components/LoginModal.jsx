@@ -10,8 +10,8 @@ export default function LoginModal({ onClose, onLoginSuccess }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const validCredentials = {
-    email: 'user@ekspora.com',
-    password: 'ekspora123'
+    email: 'admin',
+    password: 'admin'
   };
 
   const handleLogin = async (e) => {
@@ -128,4 +128,5 @@ export default function LoginModal({ onClose, onLoginSuccess }) {
       </div>
     </div>
   );
+
 }
