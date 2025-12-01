@@ -22,7 +22,7 @@ const EducationMentor = () => {
       instructor: 'John Anderson',
       videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
       topics: ['Export Documentation', 'Shipping Methods', 'Payment Terms', 'Market Research'],
-      price: 'Rp 1,500,000',
+      price: '$7',
       modules: [
         { title: 'Introduction to Export Business', lessons: 6, duration: '2 hours' },
         { title: 'Understanding Export Documentation', lessons: 8, duration: '3 hours' },
@@ -43,7 +43,7 @@ const EducationMentor = () => {
       instructor: 'Sarah Chen',
       videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
       topics: ['Trade Agreements', 'Customs Regulations', 'Legal Compliance', 'Dispute Resolution'],
-      price: 'Rp 2,500,000',
+      price: '$7',
       modules: [
         { title: 'Foundations of International Trade Law', lessons: 8, duration: '3 hours' },
         { title: 'WTO and Trade Agreements', lessons: 8, duration: '3.5 hours' },
@@ -64,7 +64,7 @@ const EducationMentor = () => {
       instructor: 'Michael Roberts',
       videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
       topics: ['Supply Chain Optimization', 'Warehouse Management', 'Freight Forwarding', 'Risk Management'],
-      price: 'Rp 3,500,000',
+      price: '$7',
       modules: [
         { title: 'Supply Chain Strategy', lessons: 10, duration: '4 hours' },
         { title: 'Advanced Warehouse Operations', lessons: 10, duration: '4 hours' },
@@ -85,7 +85,7 @@ const EducationMentor = () => {
       instructor: 'Emma Wilson',
       videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
       topics: ['SEO for Export', 'Social Media Marketing', 'B2B Platforms', 'Email Campaigns'],
-      price: 'Rp 1,800,000',
+      price: '$7',
       modules: [
         { title: 'Digital Marketing Fundamentals', lessons: 5, duration: '2 hours' },
         { title: 'SEO and Content Strategy', lessons: 5, duration: '2.5 hours' },
@@ -104,7 +104,7 @@ const EducationMentor = () => {
       experience: '15 years',
       rating: 4.9,
       sessions: 342,
-      hourlyRate: 'Rp 500,000/hour',
+      hourlyRate: '$7',
       bio: 'Expert in international trade law with experience handling 200+ export-import cases.',
       availability: ['Monday 09:00-17:00', 'Wednesday 09:00-17:00', 'Friday 09:00-17:00'],
       languages: ['English', 'Indonesian', 'Mandarin']
@@ -115,7 +115,7 @@ const EducationMentor = () => {
       experience: '12 years',
       rating: 4.8,
       sessions: 289,
-      hourlyRate: 'Rp 450,000/hour',
+      hourlyRate: '$7',
       bio: 'Export documentation specialist who has helped 500+ companies complete their export processes.',
       availability: ['Tuesday 10:00-18:00', 'Thursday 10:00-18:00', 'Saturday 09:00-15:00'],
       languages: ['English', 'Indonesian']
@@ -126,7 +126,7 @@ const EducationMentor = () => {
       experience: '18 years',
       rating: 5.0,
       sessions: 456,
-      hourlyRate: 'Rp 600,000/hour',
+      hourlyRate: '$7',
       bio: 'Global logistics veteran with track record of optimizing shipping costs by up to 40% for clients.',
       availability: ['Monday 08:00-16:00', 'Tuesday 08:00-16:00', 'Thursday 08:00-16:00'],
       languages: ['English', 'Indonesian', 'Japanese']
@@ -137,7 +137,7 @@ const EducationMentor = () => {
       experience: '10 years',
       rating: 4.7,
       sessions: 234,
-      hourlyRate: 'Rp 400,000/hour',
+      hourlyRate: '$7',
       bio: 'Digital marketing strategist who has helped 100+ export businesses increase their online presence.',
       availability: ['Wednesday 11:00-19:00', 'Friday 11:00-19:00', 'Saturday 10:00-16:00'],
       languages: ['English', 'Indonesian', 'Spanish']
@@ -555,5 +555,6 @@ const EducationMentor = () => {
     </div>
   );
 };
+
 
 export default EducationMentor;
