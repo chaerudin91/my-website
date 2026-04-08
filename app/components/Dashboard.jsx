@@ -26,7 +26,7 @@ export default function Dashboard({ onLogout }) {
       <nav className="bg-white shadow-lg fixed w-full z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <h1 className="text-2xl font-bold" style={{ color: '#bc1823' }}>Ekspora</h1>
+            <h1 className="text-2xl font-bold" style={{ color: '#bc1823' }}>INekspor</h1>
             <button
               onClick={onLogout}
               className="flex items-center gap-2 px-4 py-2 rounded-lg text-white font-semibold"
