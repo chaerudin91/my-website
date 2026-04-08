@@ -767,7 +767,7 @@ export default function LandingPage({ onShowLogin }) {
               <div>
                 <h4 className="font-bold text-white mb-4">Contact</h4>
                 <div className="space-y-2 text-gray-400">
-                  <p>info@ekspora.com</p>
+                  <p>info@inexport.com</p>
                   <p>+1 (555) 123-4567</p>
                 </div>
               </div>
