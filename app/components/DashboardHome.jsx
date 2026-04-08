@@ -5,7 +5,7 @@ export default function DashboardHome({ setActiveMenu }) {
   return (
     <div>
       <h1 className="text-4xl font-bold mb-6" style={{ color: '#3d3d3d' }}>
-        Welcome to Ekspora Dashboard
+        Welcome to INekspor Dashboard
       </h1>
       
       <div className="grid md:grid-cols-3 gap-6 mb-8">
