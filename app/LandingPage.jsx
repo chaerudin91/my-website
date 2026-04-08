@@ -137,7 +137,7 @@ export default function LandingPage({ onShowLogin }) {
       name: "Sarah Johnson",
       role: "Export Manager",
       company: "TechExport Inc",
-      content: "Ekspora transformed our export business. The AI tools and expert guidance are invaluable!",
+      content: "INekspor transformed our export business. The AI tools and expert guidance are invaluable!",
       rating: 5,
       imageUrl: "foto1.jpeg", // Ganti dengan path image Anda
       fallbackEmoji: "👩‍💼"
@@ -333,7 +333,7 @@ export default function LandingPage({ onShowLogin }) {
             <div className="flex justify-between items-center h-20">
               <div className="flex items-center hover-glow rounded-lg p-2">
                 <img 
-                  src="/logo-inexport.png" 
+                  src="/logo-inexport.jpeg" 
                   alt="Inexport" 
                   className="h-10 transition-transform hover:scale-110"
                   style={{ objectFit: 'contain' }}
@@ -411,7 +411,7 @@ export default function LandingPage({ onShowLogin }) {
                 </div>
                 
                 <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight" style={{ color: '#3d3d3d' }}>
-                  Master Export & Import with <span style={{ color: '#bc1823' }} className="shimmer-effect">Ekspora</span>
+                  Master Export & Import with <span style={{ color: '#bc1823' }} className="shimmer-effect">INekspor</span>
                 </h2>
                 
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
@@ -507,7 +507,7 @@ export default function LandingPage({ onShowLogin }) {
               className={`text-center mb-16 ${visibleSections.has('features-title') ? 'visible animate-fade-in-up' : ''}`}
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: '#3d3d3d' }}>
-                Why Choose <span style={{ color: '#bc1823' }}>Ekspora?</span>
+                Why Choose <span style={{ color: '#bc1823' }}>INekspor?</span>
               </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                 We provide everything you need to succeed in international trade
@@ -723,7 +723,7 @@ export default function LandingPage({ onShowLogin }) {
               Ready to Start Your Export-Import Journey?
             </h2>
             <p className="text-xl text-white opacity-90 mb-8">
-              Join thousands of successful traders who transformed their business with Ekspora
+              Join thousands of successful traders who transformed their business with INekspor
             </p>
             <button 
               onClick={onShowLogin}
@@ -741,8 +741,8 @@ export default function LandingPage({ onShowLogin }) {
             <div className="grid md:grid-cols-4 gap-8 mb-8">
               <div>
                 <img 
-                  src="/logo-ekspora.png" 
-                  alt="Ekspora" 
+                  src="/logo-inexport.jpeg" 
+                  alt="INekspor" 
                   className="h-8 mb-4 hover:scale-110 transition-transform"
                   style={{ objectFit: 'contain', filter: 'brightness(0) invert(1)' }}
                 />
@@ -773,7 +773,7 @@ export default function LandingPage({ onShowLogin }) {
               </div>
             </div>
             <div className="border-t border-gray-700 pt-8 text-center text-gray-400">
-              <p>&copy; 2025 Ekspora. All rights reserved.</p>
+              <p>&copy; 2025 INekspor. All rights reserved.</p>
             </div>
           </div>
         </footer>
