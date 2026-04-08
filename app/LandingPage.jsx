@@ -333,8 +333,8 @@ export default function LandingPage({ onShowLogin }) {
             <div className="flex justify-between items-center h-20">
               <div className="flex items-center hover-glow rounded-lg p-2">
                 <img 
-                  src="/logo-ekspora.png" 
-                  alt="Ekspora" 
+                  src="/logo-inexport.png" 
+                  alt="Inexport" 
                   className="h-10 transition-transform hover:scale-110"
                   style={{ objectFit: 'contain' }}
                 />
