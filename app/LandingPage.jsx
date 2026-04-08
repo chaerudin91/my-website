@@ -140,7 +140,7 @@ export default function LandingPage({ onShowLogin }) {
       content: "INekspor transformed our export business. The AI tools and expert guidance are invaluable!",
       rating: 5,
       imageUrl: "foto1.jpeg", // Ganti dengan path image Anda
-      fallbackEmoji: "👩‍💼"
+      fallbackEmoji: "👩‍💼 "
     },
     {
       name: "Michael Chen",
